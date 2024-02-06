@@ -13,7 +13,6 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
-
     @Column
     private String title;
     @Column
@@ -21,9 +20,6 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
-    @Column
     @ManyToOne
     private User user;
-
-
 }
