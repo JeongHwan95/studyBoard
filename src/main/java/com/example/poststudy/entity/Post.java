@@ -14,14 +14,16 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
     @Column
     private String title;
     @Column
     private String content;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
-
+    @Column
     @ManyToOne
     private User user;
+
+
 }

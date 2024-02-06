@@ -26,7 +26,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column
     @OneToMany
     private List<Post> posts;
 }
