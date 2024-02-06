@@ -1,5 +1,7 @@
 package com.example.poststudy.service;
 
+import com.example.poststudy.dto.RequestPostDTO;
+import com.example.poststudy.entity.User;
 import com.example.poststudy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,5 +14,17 @@ public class UserService {
     @Autowired
     public UserService(UserRepository repository) {
         this.repository = repository;
+    }
+
+    public boolean postUser(RequestPostDTO requestDTO) {
+
+        User user = new User();
+        user.setId(requestDTO.getId());
+        user.setName(requestDTO.getName());
+        user.setEmail(requestDTO.getEmail());
+        user.setPassword(requestDTO.getPassword());
+        repository.save(user);
+
+        return true;
     }
 }
