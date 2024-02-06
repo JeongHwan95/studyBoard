@@ -5,6 +5,7 @@ import com.example.poststudy.repository.UserRepository;
 import com.example.poststudy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -20,17 +21,22 @@ public class UserController {
     @GetMapping("/get")
     public String getUser(){
 
-        return "PostUser.html";
+        return "join.html";
     }
 
 
     @PostMapping("/post")
-    @ResponseBody
-    public boolean postUser(@ModelAttribute RequestPostDTO requestDTO){
+    public String postUser(@ModelAttribute RequestPostDTO requestDTO, Model model){
 
 //        System.out.println(requestDTO.getId() + ", " + requestDTO.getEmail() + ", " + requestDTO.getPassword() +", " + requestDTO.getName());
-        return service.postUser(requestDTO);
+        boolean value = service.postUser(requestDTO);
 
+        if(value){
 
+            return "login";
+        }else{
+            model.addAttribute("value", "false");
+            return "join";
+        }
     }
 }
