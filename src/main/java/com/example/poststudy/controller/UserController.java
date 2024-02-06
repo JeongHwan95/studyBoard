@@ -1,15 +1,22 @@
 package com.example.poststudy.controller;
 
-import com.example.poststudy.repository.UserRepository;
+import com.example.poststudy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class UserController {
 
-    UserRepository repository;
+    UserService userService;
     @Autowired
-    public UserController(UserRepository repository) {
-        this.repository = repository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
+
+
+
+
+
+
+
 }

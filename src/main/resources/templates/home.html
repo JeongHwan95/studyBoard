@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+
+<h2>게시판 목록</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td><a href="/read">첫 번째 게시글</a></td>
+        <td>작성자2</td>
+        <td>2022-02-10</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td><a href="/view-post/2">첫 번째 게시글</a></td>
+        <td>작성자2</td>
+        <td>2022-02-10</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td><a href="/view-post/2">첫 번째 게시글</a></td>
+        <td>작성자3</td>
+        <td>2022-02-10</td>
+    </tr>
+
+    <!-- 다른 게시글들의 정보도 반복해서 표시 -->
+    </tbody>
+</table>
+
+</body>
+</html>
