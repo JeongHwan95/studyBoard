@@ -1,11 +1,13 @@
 package com.example.poststudy.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Table(name = "user")
 @Entity
+@Data
 public class User {
 
     @Id
@@ -24,7 +26,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column
     @OneToMany
     private List<Post> posts;
 }
