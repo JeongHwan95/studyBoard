@@ -6,6 +6,7 @@ import com.example.poststudy.service.PostService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -68,5 +69,15 @@ public class PostController {
         return "read";
     }
 
+    //-----------------------------------------------------------------------
+    /*
+        게시글 삭제 - 김제은 2024-02-07
+     */
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deletePost(@RequestParam("postId") Long postId){
+        log.info("postId = {}", postId);
+        postService.deletePost(postId);
 
+        return ResponseEntity.ok("게시글 삭제 완료");
+    }
 }
