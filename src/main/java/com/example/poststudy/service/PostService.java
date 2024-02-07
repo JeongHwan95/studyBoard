@@ -20,8 +20,15 @@ public class PostService {
     private final PostRepository postRepository;
 
     /*
-    게시글 작성 - 김제은 - 2024-02-06-16-30
+    게시글 작성 - 김제은 - 2024-02-07
      */
+    public void deletePost(Long postId){
+        postRepository.deleteById(postId);
+    }
+
+    /*
+    게시글 삭제 - 김제은 - 2024-02-077-16-30
+  */
     public void write(Post post){
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         Date now = new Date(currentTimestamp.getTime());
