@@ -22,12 +22,12 @@ public class UserService {
     /*
     회원 가입 - 김정환
      */
-    public User postUser(RequestPostDTO requestDTO) {
+    public boolean postUser(RequestPostDTO requestDTO) {
 
-        User user1 = repository.findUserById(requestDTO.getId());
+//        User user1 = repository.findUserById(requestDTO.getId());
         User user2 = repository.findUserByEmail(requestDTO.getEmail());
 
-        if(user1 != null && user2 != null){
+        if( user2 != null){
             return false;
         }
 
@@ -38,7 +38,7 @@ public class UserService {
         user.setPassword(requestDTO.getPassword());
         User saveUser = repository.save(user);
 
-        return saveUser;
+        return true;
     }
 
     /*

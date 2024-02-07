@@ -49,10 +49,10 @@
     </style>
 </head>
 <body>
-    <script defer>
-        let value = `${value}`;
+    <script th:inline="javascript">
+        let value = /*[[${value}]]*/``;
         console.log(value);
-        if(!value){
+        if(value=="false"){
             alert("이메일이나 아이디가 기존에 존재합니다. ");
         }
     </script>
