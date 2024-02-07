@@ -39,6 +39,46 @@
     <p><span th:text = "${post.content}"></span></p>
     <small><a href="/post/home">목록으로 돌아가기</a></small>
 </div>
+<div th:if="${post.user.userId eq session.user.getUserId()}">
+    <button onclick="editPost()">수정</button>
+    <button onclick="deletePost()">삭제</button>
+</div>
 
+<script th:inline="javascript">
+    var postId = /*[[${post.postId}]]*/ null; // postId 가져오기
+</script>
+
+<script>
+    function editPost() {
+        // 게시글 수정 페이지로 이동
+        window.location.href = '/post/home/' + postId;
+    }
+
+    function deletePost() {
+        // 게시글 삭제 함수
+        var deleteUrl = '/post/delete?postId=' + postId;
+
+        // 사용자에게 삭제 여부를 묻는 경고창 표시
+        if (confirm('게시글을 삭제하시겠습니까?')) {
+            // 삭제 요청 보내기
+            fetch(deleteUrl, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // 삭제가 성공하면 목록 페이지로 리다이렉트
+                        window.location.href = '/post/home';
+                    } else {
+                        console.error('Error:', response.status);
+                        // 삭제에 실패하면 사용자에게 알림
+                        alert('게시글 삭제에 실패했습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    }
+</script>
 </body>
 </html>
