@@ -19,7 +19,6 @@ public class Post {
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
-
     @ManyToOne
     private User user;
 }

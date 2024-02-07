@@ -5,6 +5,9 @@ import com.example.poststudy.entity.User;
 import com.example.poststudy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,7 +19,10 @@ public class UserService {
         this.repository = repository;
     }
 
-    public boolean postUser(RequestPostDTO requestDTO) {
+    /*
+    회원 가입 - 김정환
+     */
+    public User postUser(RequestPostDTO requestDTO) {
 
         User user1 = repository.findUserById(requestDTO.getId());
         User user2 = repository.findUserByEmail(requestDTO.getEmail());
@@ -30,8 +36,35 @@ public class UserService {
         user.setName(requestDTO.getName());
         user.setEmail(requestDTO.getEmail());
         user.setPassword(requestDTO.getPassword());
-        repository.save(user);
+        User saveUser = repository.save(user);
 
-        return true;
+        return saveUser;
+    }
+
+    /*
+    회원 탈퇴 - 김제은
+     */
+    @Transactional
+    public void userDelete(String id){
+        repository.deleteById(id);
+    }
+
+    /*
+    로그인 - 김제은
+     */
+    public User login(String id, String password) throws Exception{
+        Optional<User> user = repository.findById(id);
+
+        if(user.isPresent()){
+            User user1 = user.get();
+            if(user1.getPassword().equals(password)){
+                return user1;
+            } else {
+                throw new Exception("비밀번호 오류");
+            }
+        } else {
+            throw new Exception("존재하지 않는 아이디");
+        }
+
     }
 }

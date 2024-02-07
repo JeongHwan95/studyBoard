@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 목록</title>
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,6 +40,19 @@
     </style>
 </head>
 <body>
+<div th:if="${loginUser != null}">
+    <h2>환영합니다, <span th:text="${loginUser.username}"></span>님!</h2>
+    <!-- 기타 페이지 내용 -->
+</div>
+
+<!-- 로그인한 사용자 정보가 존재하지 않을 때 -->
+<div th:unless="${loginUser != null}">
+    <h2>로그인하세요!</h2>
+    <form action="/user/login", method="get">
+        <button type="submit">로그인</button>
+    </form>
+    <!-- 기타 페이지 내용 -->
+</div>
 
 <h2>게시판 목록</h2>
 
@@ -74,5 +89,20 @@
     </tbody>
 </table>
 
+<button id="deleteButton">회원탈퇴</button>
+
+<script>
+    document.getElementById('deleteButton').addEventListener('click', function() {
+        fetch('/user/delete', {
+            method: 'DELETE'
+        })
+            .then(response => {
+                window.location.href = '/user/login';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
 </body>
 </html>
