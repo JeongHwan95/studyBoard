@@ -1,5 +1,6 @@
 package com.example.poststudy.service;
 
+import com.example.poststudy.dto.LoginDto;
 import com.example.poststudy.dto.RequestPostDTO;
 import com.example.poststudy.entity.User;
 import com.example.poststudy.repository.UserRepository;
@@ -53,12 +54,12 @@ public class UserService {
     /*
     로그인 - 김제은
      */
-    public User login(String id, String password) throws Exception{
-        Optional<User> user = repository.findById(id);
+    public User login(LoginDto loginDto) throws Exception{
+        Optional<User> user = repository.findById(loginDto.getId());
 
         if(user.isPresent()){
             User user1 = user.get();
-            if(user1.getPassword().equals(password)){
+            if(user1.getPassword().equals(loginDto.getPassword())){
                 return user1;
             } else {
                 throw new Exception("비밀번호 오류");
