@@ -51,7 +51,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestParam("id") String id,
-                        @RequestParam("password") String password, HttpSession session){
+                        @RequestParam("password") String password, HttpSession session) throws Exception {
 
         User loginUser = service.login(id, password);
         session.setAttribute("user", loginUser);
