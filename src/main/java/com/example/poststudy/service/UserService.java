@@ -28,10 +28,12 @@ public class UserService {
      */
     public boolean postUser(RequestPostDTO requestDTO) {
 
-//        User user1 = repository.findUserById(requestDTO.getId());
+        User user1 = repository.findUserById(requestDTO.getId());
         User user2 = repository.findUserByEmail(requestDTO.getEmail());
 
-        if( user2 != null){
+
+
+        if(user1 != null || user2 != null){
             return false;
         }
 
