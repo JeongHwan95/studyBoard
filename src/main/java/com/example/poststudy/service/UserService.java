@@ -1,22 +1,26 @@
 package com.example.poststudy.service;
 
 import com.example.poststudy.dto.RequestPostDTO;
+import com.example.poststudy.entity.Post;
 import com.example.poststudy.entity.User;
+import com.example.poststudy.repository.PostRepository;
 import com.example.poststudy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
 
     UserRepository repository;
-
+    PostRepository postRepository;
     @Autowired
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository, PostRepository postRepository) {
         this.repository = repository;
+        this.postRepository = postRepository;
     }
 
     /*
@@ -47,6 +51,10 @@ public class UserService {
      */
     @Transactional
     public void userDelete(String id){
+        User user = repository.findUserById(id);
+        List<Post> posts = postRepository.findPostsByUser(user);
+
+        postRepository.deleteAll(posts);
         repository.deleteById(id);
     }
     //------------------------------------------------------------------------
