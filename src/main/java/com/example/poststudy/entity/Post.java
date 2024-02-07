@@ -21,7 +21,7 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
-    @Column
+
     @ManyToOne
     private User user;
 
