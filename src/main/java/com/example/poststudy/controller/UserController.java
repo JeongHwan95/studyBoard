@@ -1,6 +1,7 @@
 package com.example.poststudy.controller;
 
 import com.example.poststudy.dto.RequestPostDTO;
+import com.example.poststudy.dto.LoginDto;
 import com.example.poststudy.entity.User;
 import com.example.poststudy.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -59,10 +60,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("id") String id,
-                        @RequestParam("password") String password, HttpSession session) throws Exception {
+    public String login(@RequestBody LoginDto loginDto, HttpSession session) throws Exception {
 
-        User loginUser = service.login(id, password);
+        User loginUser = service.login(loginDto);
         session.setAttribute("user", loginUser);
         log.info("로그인 성공, 이름 = {}", loginUser.getName());
 
