@@ -64,6 +64,7 @@ public class UserController {
 
         User loginUser = service.login(id, password);
         session.setAttribute("user", loginUser);
+
         log.info("로그인 성공, 이름 = {}", loginUser.getName());
 
         return "redirect:/post/home";
@@ -84,6 +85,17 @@ public class UserController {
         log.info("회원탈퇴 성공");
 
         return ResponseEntity.ok("탈퇴 성공");
+    }
+
+    /*
+         로그아웃 - 김제은 - 2024-02-07-10-30
+     */
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        log.info("로그아웃 완료");
+        
+        return "/login";
     }
 
 
