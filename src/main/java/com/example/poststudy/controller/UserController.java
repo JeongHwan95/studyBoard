@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -27,11 +28,12 @@ public class UserController {
     @GetMapping("/get")
     public String getUser(){
 
-        return "PostUser.html";
+        return "join.html";
     }
 
 
     @PostMapping("/post")
+
     public String postUser(@ModelAttribute RequestPostDTO requestDTO){
 
 //        System.out.println(requestDTO.getId() + ", " + requestDTO.getEmail() + ", " + requestDTO.getPassword() +", " + requestDTO.getName());
@@ -58,6 +60,20 @@ public class UserController {
         log.info("로그인 성공, 이름 = {}", loginUser.getName());
 
         return "/home";
+
+    public String postUser(@ModelAttribute RequestPostDTO requestDTO, Model model){
+
+//        System.out.println(requestDTO.getId() + ", " + requestDTO.getEmail() + ", " + requestDTO.getPassword() +", " + requestDTO.getName());
+        boolean value = service.postUser(requestDTO);
+
+        if(value){
+
+            return "login";
+        }else{
+            model.addAttribute("value", "false");
+            return "join";
+        }
+
     }
 
     //----------------------------------------------------------------------------------------------

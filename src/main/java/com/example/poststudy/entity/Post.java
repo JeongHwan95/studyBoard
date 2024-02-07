@@ -13,17 +13,12 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
-
     @Column
     private String title;
     @Column
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
-
-
     @ManyToOne
     private User user;
-
-
 }

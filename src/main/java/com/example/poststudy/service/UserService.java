@@ -24,6 +24,13 @@ public class UserService {
      */
     public User postUser(RequestPostDTO requestDTO) {
 
+        User user1 = repository.findUserById(requestDTO.getId());
+        User user2 = repository.findUserByEmail(requestDTO.getEmail());
+
+        if(user1 != null && user2 != null){
+            return false;
+        }
+
         User user = new User();
         user.setId(requestDTO.getId());
         user.setName(requestDTO.getName());
