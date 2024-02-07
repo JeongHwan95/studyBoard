@@ -46,4 +46,10 @@ public class PostController {
         return "/home";
     }
 
+//    //get post put delete
+//    @GetMapping("/getList")
+//    public String getPostList(){
+//
+//    }
+
 }

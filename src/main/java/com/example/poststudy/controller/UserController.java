@@ -28,17 +28,24 @@ public class UserController {
     @GetMapping("/get")
     public String getUser(){
 
-        return "join.html";
+        return "join";
     }
 
 
     @PostMapping("/post")
-
-    public String postUser(@ModelAttribute RequestPostDTO requestDTO){
+    public String postUser(@ModelAttribute RequestPostDTO requestDTO, Model model){
 
 //        System.out.println(requestDTO.getId() + ", " + requestDTO.getEmail() + ", " + requestDTO.getPassword() +", " + requestDTO.getName());
-        service.postUser(requestDTO);
-        return "/login";
+        boolean value = service.postUser(requestDTO);
+
+        if(value){
+
+            return "login";
+        }else{
+            model.addAttribute("value", "false");
+            return "join";
+        }
+
     }
 
     //----------------------------------------------------------------------------------------------
@@ -61,19 +68,6 @@ public class UserController {
 
         return "/home";
 
-    public String postUser(@ModelAttribute RequestPostDTO requestDTO, Model model){
-
-//        System.out.println(requestDTO.getId() + ", " + requestDTO.getEmail() + ", " + requestDTO.getPassword() +", " + requestDTO.getName());
-        boolean value = service.postUser(requestDTO);
-
-        if(value){
-
-            return "login";
-        }else{
-            model.addAttribute("value", "false");
-            return "join";
-        }
-
     }
 
     //----------------------------------------------------------------------------------------------
@@ -91,5 +85,7 @@ public class UserController {
 
         return ResponseEntity.ok("탈퇴 성공");
     }
+
+
 
 }
