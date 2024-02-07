@@ -1,5 +1,6 @@
 package com.example.poststudy.controller;
 
+import com.example.poststudy.dto.RequestRewriteDTO;
 import com.example.poststudy.entity.Post;
 import com.example.poststudy.entity.User;
 import com.example.poststudy.service.PostService;
@@ -37,7 +38,7 @@ public class PostController {
         post.setUser(user);
         postService.write(post);
 
-        return "/home";
+        return "redirect:/post/home";
     }
     //----------------------------------------------------------------
 
@@ -67,7 +68,33 @@ public class PostController {
 
         return "read";
     }
+    /*
+    게시글 수정 - 정환
+    */
+    @GetMapping("/write/{postId}")
+    public String rewritePost(@PathVariable("postId") Long postId, Model model, HttpSession session){
+        model.addAttribute("postId", postId);
+        User user = (User)session.getAttribute("user");
 
+        boolean flag = this.postService.checkAuthor(user, postId);
+
+        if(flag)
+            return "/rewrite";
+        else
+            return "redirect:/post/home";
+
+    }
+    /*
+    게시글 수정 - 정환
+    */
+    @PostMapping("/rewrite")
+    public String rewritePost(@ModelAttribute RequestRewriteDTO requestDTO){
+        log.info("requestDTO : {}", requestDTO);
+        System.out.println(requestDTO.getPostId() +", " + requestDTO.getTitle()+", "+requestDTO.getContent());
+        this.postService.rewritePost(requestDTO);
+
+        return "redirect:/post/home";
+    }
 
 
 }

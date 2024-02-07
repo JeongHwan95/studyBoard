@@ -1,13 +1,17 @@
 package com.example.poststudy.service;
 
+import com.example.poststudy.dto.RequestRewriteDTO;
 import com.example.poststudy.entity.Post;
+import com.example.poststudy.entity.User;
 import com.example.poststudy.repository.PostRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +46,28 @@ public class PostService {
         Post post = this.postRepository.findById(postId).orElse(null);
 
         return post;
+    }
+
+    /*
+    게시글 수정 - 김정환 - 2024-02-07-14-38
+     */
+    @Transactional
+    public void rewritePost(RequestRewriteDTO requestDTO) {
+
+        Post post = this.postRepository.findById(requestDTO.getPostId()).orElse(null);
+        post.setTitle(requestDTO.getTitle());
+        post.setContent(requestDTO.getContent());
+    }
+    /*
+    게시글 수정시 사용자가 글과 일치하는지 확인 - 김정환 - 2024-02-07-14-38
+    */
+    public boolean checkAuthor(User user, Long postId) {
+        Post post = this.postRepository.findById(postId).orElse(null);
+        User userInWrite = post.getUser();
+
+        if(Objects.equals(user.getUserId(), userInWrite.getUserId()))
+            return true;
+        else
+            return false;
     }
 }
