@@ -45,7 +45,7 @@ public class UserService {
     /*
     로그인 - 김제은
      */
-    public User login(String id, String password){
+    public User login(String id, String password) throws Exception{
         Optional<User> user = repository.findById(id);
 
         if(user.isPresent()){
@@ -53,12 +53,11 @@ public class UserService {
             if(user1.getPassword().equals(password)){
                 return user1;
             } else {
-                Exception exception = new Exception("비밀번호 오류");
+                throw new Exception("비밀번호 오류");
             }
         } else {
-            Exception exception = new Exception("존재하지 않는 아이디");
+            throw new Exception("존재하지 않는 아이디");
         }
 
-        return user.get();
     }
 }
