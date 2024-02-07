@@ -66,17 +66,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>1</td>
-        <td><a href="/read">첫 번째 게시글</a></td>
-        <td>작성자2</td>
-        <td>2022-02-10</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td><a href="/view-post/2">첫 번째 게시글</a></td>
-        <td>작성자2</td>
-        <td>2022-02-10</td>
+    <tr th:each="post : ${posts}">
+        <td><span th:text = "${post.postId}"></span></td>
+        <td><a th:href="@{/post/click(postId=${post.postId})}"> <span th:text = "${post.title}"></span></a></td>
+        <td><span th:text = "${post.user.id}"></span></td>
+        <td><span th:text = "${post.created}"></span></td>
     </tr>
     <tr>
         <td>3</td>
