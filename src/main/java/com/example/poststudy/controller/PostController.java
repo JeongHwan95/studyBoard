@@ -78,6 +78,10 @@ public class PostController {
         log.info("postId = {}", postId);
         postService.deletePost(postId);
 
+
         return ResponseEntity.ok("게시글 삭제 완료");
     }
+
+
+
 }
