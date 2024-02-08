@@ -66,7 +66,7 @@ public class UserController {
         session.setAttribute("user", loginUser);
         log.info("로그인 성공, 이름 = {}", loginUser.getName());
 
-        return "redirect:/post/home";
+        return "/home";
 
     }
 
