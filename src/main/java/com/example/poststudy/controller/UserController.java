@@ -69,6 +69,14 @@ public class UserController {
         return ResponseEntity.ok("Login Success");
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        log.info("로그 아웃");
+
+        return "/login";
+    }
+
     //----------------------------------------------------------------------------------------------
 
     /*
