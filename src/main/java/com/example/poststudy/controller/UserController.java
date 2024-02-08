@@ -60,14 +60,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginDto loginDto, HttpSession session) throws Exception {
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto, HttpSession session) throws Exception {
 
         User loginUser = service.login(loginDto);
         session.setAttribute("user", loginUser);
         log.info("로그인 성공, 이름 = {}", loginUser.getName());
 
-        return "/home";
-
+        return ResponseEntity.ok("Login Success");
     }
 
     //----------------------------------------------------------------------------------------------
