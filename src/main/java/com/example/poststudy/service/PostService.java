@@ -48,9 +48,12 @@ public class PostService {
     /*
     게시글 하나 반환 - 김정환 - 2024-02-07-11-08
      */
+    @Transactional
     public Post clickPost(Long postId) {
 
         Post post = this.postRepository.findById(postId).orElse(null);
+        int numOfClick = post.getNumOfClick();
+        post.setNumOfClick(++numOfClick);
 
         return post;
     }

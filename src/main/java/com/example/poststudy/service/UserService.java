@@ -6,6 +6,7 @@ import com.example.poststudy.entity.Post;
 import com.example.poststudy.entity.User;
 import com.example.poststudy.repository.PostRepository;
 import com.example.poststudy.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserService {
 
     UserRepository repository;
@@ -65,6 +67,7 @@ public class UserService {
     로그인 - 김제은
      */
     public User login(LoginDto loginDto) throws Exception{
+        log.info("login invoked. ");
         Optional<User> user = repository.findById(loginDto.getId());
 
         if(user.isPresent()){

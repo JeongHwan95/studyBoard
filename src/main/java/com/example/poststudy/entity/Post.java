@@ -19,6 +19,8 @@ public class Post {
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
+    @Column(columnDefinition = "int default 0")
+    private int numOfClick;
     @ManyToOne
     private User user;
 }
