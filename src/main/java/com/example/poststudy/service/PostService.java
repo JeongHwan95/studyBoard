@@ -80,4 +80,20 @@ public class PostService {
         else
             return false;
     }
+
+    /*
+    게시글 신고 - 김정환
+     */
+
+    @Transactional
+    public void declarePost(Long postId) {
+
+        Post post = this.postRepository.findById(postId).orElse(null);
+        int declaration = post.getDeclaration()+1;
+        post.setDeclaration(declaration);
+
+        if(declaration>=2){
+            this.postRepository.delete(post);
+        }
+    }
 }
