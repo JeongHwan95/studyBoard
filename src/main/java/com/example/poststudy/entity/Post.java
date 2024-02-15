@@ -21,6 +21,8 @@ public class Post {
     private Date created;
     @Column(columnDefinition = "int default 0")
     private int numOfClick;
+    @Column(columnDefinition = "int default 0")
+    private int declaration;
     @ManyToOne
     private User user;
 }

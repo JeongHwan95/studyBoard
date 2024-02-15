@@ -111,6 +111,16 @@ public class PostController {
         return ResponseEntity.ok("게시글 삭제 완료");
     }
 
+    /*
+    게시글 삭제
+     */
+    @GetMapping("/declaration/{postId}")
+    public String declarePost(@PathVariable("postId") Long postId){
+
+        this.postService.declarePost(postId);
+
+        return "redirect:/post/home";
+    }
 
 
 }
