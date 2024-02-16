@@ -85,10 +85,6 @@ public class UserService {
 
     }
 
-    public List<User> userList() {
-
-        return this.repository.findAll();
-    }
 
     public Page<User> findPaginated(PageRequest pageable) {
 
