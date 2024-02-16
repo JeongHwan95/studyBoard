@@ -8,6 +8,8 @@ import com.example.poststudy.repository.PostRepository;
 import com.example.poststudy.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,6 +83,16 @@ public class UserService {
             throw new Exception("존재하지 않는 아이디");
         }
 
+    }
+
+    public List<User> userList() {
+
+        return this.repository.findAll();
+    }
+
+    public Page<User> findPaginated(PageRequest pageable) {
+
+        return this.repository.findAll(pageable);
     }
     //------------------------------------------------------------------------
 }
